@@ -3,26 +3,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
-// const federationConfig = require('./federation.config')
+const federationConfig = require('./federation.config.json')
 const deps = require('./package.json').dependencies
-
-const buildDate = new Date().toLocaleString()
 
 module.exports = {
   entry: {
-    app: 'src/index.ts',
+    app: './src/index.ts',
   },
   plugins: [
-    // new webpack.EnvironmentPlugin({ BUILD_DATE: buildDate }),
-    // new webpack.DefinePlugin({
-    //   'process.env': JSON.stringify(process.env),
-    // }),
     new ModuleFederationPlugin({
-      name: 'app-shell',
-      remotes: {
-        users: process.env.REACT_APP_MFE_USERS_URL || 'users@http://localhost:8001/remoteEntry.js',
-        posts: process.env.REACT_APP_MFE_POSTS_URL || 'posts@http://localhost:8002/remoteEntry.js',
-      },
+      ...federationConfig,
+      filename: 'remoteEntry.js',
       shared: {
         ...deps,
         react: {
@@ -62,7 +53,6 @@ module.exports = {
     }),
     new ForkTsCheckerWebpackPlugin(),
   ],
-
   module: {
     rules: [
       {
@@ -72,6 +62,7 @@ module.exports = {
           lazy: true,
         },
       },
+
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
@@ -106,7 +97,6 @@ module.exports = {
     alias: {
       src: path.resolve(__dirname, './src'),
     },
-    // modules: ['src', 'node_modules'],
   },
   output: {
     filename: '[name].bundle.js',

@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Home } from './pages/Home'
-import { UsersPage } from './pages/UsersPage'
+import { PostsPage } from './pages/Posts'
 
 import { setConfig } from 'react-hot-loader'
 import { hot } from 'react-hot-loader/root'
@@ -22,7 +22,7 @@ const App = () => {
             <Routes>
               <Route path="*">
                 <Route path="home2" element={<Home />} />
-                <Route index element={<UsersPage />} />
+                <Route index element={<PostsPage />} />
                 <Route path="*" element={<div>Not found</div>} />
               </Route>
             </Routes>
@@ -37,7 +37,7 @@ const App = () => {
         <Routes>
           <Route path="*">
             <Route path="home2" element={<Home />} />
-            <Route index element={<UsersPage />} />
+            <Route index element={<PostsPage />} />
             <Route path="*" element={<div>Not found</div>} />
           </Route>
         </Routes>

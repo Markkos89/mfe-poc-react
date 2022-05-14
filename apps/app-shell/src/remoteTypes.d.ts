@@ -6,8 +6,8 @@ declare module 'users/App' {
   export default App
 }
 
-// declare module 'app2/CounterAppTwo' {
-//   const CounterAppTwo: React.ComponentType
+declare module 'posts/App' {
+  const App: React.ComponentType
 
-//   export default CounterAppTwo
-// }
+  export default App
+}

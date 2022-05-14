@@ -2,7 +2,7 @@ import React, { FC, FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { UserItem } from '../components/UserItem'
-import { usersApi } from '../services/UsersService'
+import { postsApi } from '../services/PostsService'
 import { IUser } from '../models/IUser'
 import {
   Heading,
@@ -18,19 +18,19 @@ import {
   Box,
 } from '@chakra-ui/react'
 
-export const Users: FC = () => {
+export const PostsPage: FC = () => {
   const [name, setName] = useState('')
 
   const {
     data: usersData,
     isLoading,
     error: usersError,
-  } = usersApi.useFetchAllUsersQuery(100, {
+  } = postsApi.useFetchAllPostsQuery(100, {
     // pollingInterval: 10000, // every 10 seconds API will get new data
   })
-  const [createUser] = usersApi.useCreateUserMutation()
-  const [deleteUser] = usersApi.useDeleteUserMutation()
-  const [updateUser] = usersApi.useUpdateUserMutation()
+  const [createUser] = postsApi.useCreateUserMutation()
+  const [deleteUser] = postsApi.useDeleteUserMutation()
+  const [updateUser] = postsApi.useUpdateUserMutation()
 
   const handleAddNewUser = async (event: FormEvent) => {
     event.preventDefault()
@@ -52,23 +52,24 @@ export const Users: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Users</title>
+        <title>Posts 2</title>
       </Helmet>
 
       <main>
         <Container maxW="container.xl">
-          <Heading m={10}>Users page</Heading>
-          <Link to="home2">Home</Link> | <Link to="users">Users list</Link>
+          <Heading m={10}>Posts page</Heading>
+          <Link to="home2">Home</Link> | <Link to="users">Posts list</Link>
           <form onSubmit={handleAddNewUser}>
             <Box display={'flex'} m={10}>
               <Input
                 type="text"
                 placeholder="Name"
                 value={name}
-                onChange={(event) => setName(event.target.value)}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                onChange={(event: any) => setName(event.target.value)}
                 marginRight={5}
               />
-              <Button type="submit">Add User</Button>
+              <Button type="submit">Add Post</Button>
             </Box>
           </form>
           {isLoading && (
@@ -86,7 +87,7 @@ export const Users: FC = () => {
             <Alert status="error">
               <AlertIcon />
               <AlertTitle>Error!</AlertTitle>
-              <AlertDescription>Failed to fetch users data.</AlertDescription>
+              <AlertDescription>Failed to fetch posts data.</AlertDescription>
             </Alert>
           )}
           <Grid templateColumns="repeat(auto-fit, minmax(200px, 1fr))" gap={6}>

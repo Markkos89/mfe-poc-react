@@ -4,11 +4,6 @@
     "baseUrl": "./",
     "paths": {
       "src": ["./src"]
-      // "components/*": ["components/*"],
-      // "models/*": ["models/*"],
-      // "pages/*": ["pages/*"],
-      // "redux/*": ["redux/*"],
-      // "services/*": ["services/*"]
     },
     "target": "es5",
     "module": "esnext",
@@ -19,12 +14,10 @@
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "noEmit": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "allowSyntheticDefaultImports": true
+    "skipLibCheck": true
   },
   "exclude": ["node_modules", "dist", "**/*.spec.ts"]
 }

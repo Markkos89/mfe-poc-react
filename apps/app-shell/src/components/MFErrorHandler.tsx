@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
+import { Button } from '@chakra-ui/react'
 import * as React from 'react'
 
 interface IProps {}
@@ -13,13 +14,15 @@ export class MFErrorHandler extends React.Component<
       return (
         <h3>Could not load content. {/* <Button onClick={this.props.retry}>Retry</Button>*/}</h3>
       )
+    } else if (this.props.pastDelay) {
+      return <h2>Loading...</h2>
+    } else if (this.props.timedOut) {
+      return (
+        <h2>
+          Taking longer than expected... <Button onClick={this.props.retry}>Retry</Button>
+        </h2>
+      )
     }
-    // else if (this.props.timedOut) {
-    //     return (
-    //       <h2>
-    //         Taking longer than expected... <Button onClick={this.props.retry}>Retry</Button>
-    //       </h2>
-    //     )
     //   } else if (this.props.pastDelay) {
     //     return <h2>Loading...</h2>
     //   } else {
