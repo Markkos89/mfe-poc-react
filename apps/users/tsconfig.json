@@ -1,0 +1,23 @@
+{
+  "include": ["./src/**/*"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "src": ["./src"]
+    },
+    "target": "es5",
+    "module": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
+}
