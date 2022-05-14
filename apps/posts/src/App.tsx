@@ -4,16 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { Home } from './pages/Home'
 import { PostsPage } from './pages/Posts'
 
-import { setConfig } from 'react-hot-loader'
-import { hot } from 'react-hot-loader/root'
-
-// react-hot-loader
-setConfig({
-  showReactDomPatchNotification: false,
-})
-
 const App = () => {
-  console.log(window.location.pathname)
   if (window.location.pathname === '/') {
     return (
       <>
@@ -46,4 +37,4 @@ const App = () => {
   )
 }
 
-export default hot(App)
+export default App

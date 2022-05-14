@@ -1,30 +1,27 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Loadable from 'react-loadable'
 
 import { ChakraProvider } from '@chakra-ui/react'
+
 import Header from './components/ui/Header/Header'
 import { Home } from './pages/Home'
-import { MFErrorHandler } from './components/MFErrorHandler'
+
+const UsersMFE = React.lazy(
+  () => import(/* webpackPrefetch: true */ /* webpackMode: "lazy" */ 'users/App'),
+)
+const PostsMFE = React.lazy(
+  () => import(/* webpackPrefetch: true */ /* webpackMode: "lazy" */ 'posts/App'),
+)
+
 import { setConfig } from 'react-hot-loader'
 import { hot } from 'react-hot-loader/root'
+
+import { ErrorBoundary } from 'react-error-boundary'
+import { ErrorFallback } from './components/ErrorFallback'
 
 // react-hot-loader
 setConfig({
   showReactDomPatchNotification: false,
-})
-
-// react-loadable
-const LoadableUsers = Loadable({
-  loader: () => import('users/App'),
-  loading: MFErrorHandler,
-  delay: 3000,
-})
-
-const LoadablePosts = Loadable({
-  loader: () => import('posts/App'),
-  loading: MFErrorHandler,
-  delay: 3000,
 })
 
 const App = () => {
@@ -33,14 +30,30 @@ const App = () => {
       <ChakraProvider resetCSS>
         <BrowserRouter>
           <Header />
-          <Routes>
-            <Route path="/">
-              <Route path={'/posts/*'} element={<LoadablePosts />} />
-              <Route path={'/users/*'} element={<LoadableUsers />} />
-              <Route path={'/'} element={<Home />} />
-              <Route path="*" element={<div>Not found (APP)</div>} />
-            </Route>
-          </Routes>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/">
+                <Route
+                  path={'/users/*'}
+                  element={
+                    <ErrorBoundary key="usersErrorBoundary" FallbackComponent={ErrorFallback}>
+                      <UsersMFE />
+                    </ErrorBoundary>
+                  }
+                />
+                <Route
+                  path={'/posts/*'}
+                  element={
+                    <ErrorBoundary key="postsErrorBoundary" FallbackComponent={ErrorFallback}>
+                      <PostsMFE />
+                    </ErrorBoundary>
+                  }
+                />
+                <Route path={'/'} element={<Home />} />
+                <Route path="*" element={<div>Not found (APP)</div>} />
+              </Route>
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </ChakraProvider>
     </>

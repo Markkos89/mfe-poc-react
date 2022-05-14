@@ -58,14 +58,16 @@ export const UsersPage: FC = () => {
       <main>
         <Container maxW="container.xl">
           <Heading m={10}>Users page</Heading>
-          <Link to="home2">Home</Link> | <Link to="users">Users list</Link>
+          <Link to="home2">Home</Link> | <Link to="/users">Users list</Link>
           <form onSubmit={handleAddNewUser}>
             <Box display={'flex'} m={10}>
               <Input
                 type="text"
                 placeholder="Name"
                 value={name}
-                onChange={(event) => setName(event.target.value)}
+                onChange={(event: { target: { value: React.SetStateAction<string> } }) =>
+                  setName(event.target.value)
+                }
                 marginRight={5}
               />
               <Button type="submit">Add User</Button>

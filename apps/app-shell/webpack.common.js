@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin')
 
 // const federationConfig = require('./federation.config')
 const deps = require('./package.json').dependencies
@@ -13,10 +14,10 @@ module.exports = {
     app: 'src/index.ts',
   },
   plugins: [
-    // new webpack.EnvironmentPlugin({ BUILD_DATE: buildDate }),
-    // new webpack.DefinePlugin({
-    //   'process.env': JSON.stringify(process.env),
-    // }),
+    new RetryChunkLoadPlugin({
+      retryDelay: 3000,
+      maxRetries: 5,
+    }),
     new ModuleFederationPlugin({
       name: 'app-shell',
       remotes: {
@@ -90,7 +91,7 @@ module.exports = {
               ['@babel/preset-react', { runtime: 'automatic' }],
               '@babel/preset-typescript',
             ],
-            plugins: ['transform-class-properties', 'react-hot-loader/babel'],
+            plugins: ['transform-class-properties'],
           },
         },
       },
