@@ -5,6 +5,10 @@
 ```
 - React
 - Typescript
+- Chakra-UI
+- Redux-Toolkit
+- RKT Query
+- Webpack
 - Webpack Module Federation
 - Babel
 - React Router

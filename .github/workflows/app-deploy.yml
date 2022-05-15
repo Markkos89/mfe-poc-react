@@ -21,4 +21,4 @@ jobs:
       - name: Build React App
         run: yarn install && cd apps && cd app-shell && yarn run build
       - name: Deploy app build to S3 bucket
-        run: aws s3 sync ./dist/ s3://${{ secrets.AWS_S3_BUCKET_APP_NAME }} --delete
+        run: aws s3 sync ./apps/app-shell/dist/ s3://${{ secrets.AWS_S3_BUCKET_APP_NAME }} --delete
