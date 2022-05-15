@@ -4,11 +4,6 @@
     "baseUrl": "./",
     "paths": {
       "src": ["./src"]
-      // "components/*": ["components/*"],
-      // "models/*": ["models/*"],
-      // "pages/*": ["pages/*"],
-      // "redux/*": ["redux/*"],
-      // "services/*": ["services/*"]
     },
     "target": "es5",
     "module": "esnext",
