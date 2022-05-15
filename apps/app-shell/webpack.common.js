@@ -4,10 +4,7 @@ const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlug
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin')
 
-// const federationConfig = require('./federation.config')
 const deps = require('./package.json').dependencies
-
-const buildDate = new Date().toLocaleString()
 
 module.exports = {
   entry: {
@@ -63,7 +60,6 @@ module.exports = {
     }),
     new ForkTsCheckerWebpackPlugin(),
   ],
-
   module: {
     rules: [
       {
@@ -107,7 +103,6 @@ module.exports = {
     alias: {
       src: path.resolve(__dirname, './src'),
     },
-    // modules: ['src', 'node_modules'],
   },
   output: {
     filename: '[name].bundle.js',
