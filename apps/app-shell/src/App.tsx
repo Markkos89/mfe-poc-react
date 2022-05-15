@@ -13,16 +13,8 @@ const PostsMFE = React.lazy(
   () => import(/* webpackPrefetch: true */ /* webpackMode: "lazy" */ 'posts/App'),
 )
 
-import { setConfig } from 'react-hot-loader'
-import { hot } from 'react-hot-loader/root'
-
 import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from './components/ErrorFallback'
-
-// react-hot-loader
-setConfig({
-  showReactDomPatchNotification: false,
-})
 
 const App = () => {
   return (
@@ -60,4 +52,4 @@ const App = () => {
   )
 }
 
-export default hot(App)
+export default App
