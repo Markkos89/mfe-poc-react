@@ -25,4 +25,4 @@ yarn start
 
 ## 🛠 Team and maintainers
 
-- Tag a Github team or individual contributor(s)
+- @markkos89
