@@ -42,7 +42,7 @@ const App = () => {
                   }
                 />
                 <Route path={'/'} element={<Home />} />
-                <Route path="*" element={<div>Not found (APP)</div>} />
+                <Route path="*" element={<div>Page not found (APP)</div>} />
               </Route>
             </Routes>
           </Suspense>
